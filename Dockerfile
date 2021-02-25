@@ -22,6 +22,14 @@ RUN rm -f /tmp/omrs.sql
 
 ADD ./exploit.py /exploit.py
 
+
+WORKDIR /home/wc
+COPY lib_mysqludf_sys/install.sh lib_mysqludf_sys/lib_mysqludf_sys.sql ./
+COPY lib_mysqludf_sys/lib_mysqludf_sys.so /usr/lib/mysql/plugin/
+RUN chmod 500 install.sh
+RUN bash install.sh
+
+
 EXPOSE 8080:8080
 
 ENTRYPOINT /entrypoint.sh
