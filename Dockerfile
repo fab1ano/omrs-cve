@@ -29,7 +29,9 @@ COPY lib_mysqludf_sys/lib_mysqludf_sys.so /usr/lib/mysql/plugin/
 RUN chmod 500 install.sh
 RUN bash install.sh
 
+RUN rm /var/run/mysqld/mysqld.sock.lock
 
-EXPOSE 8080:8080
 
-ENTRYPOINT /entrypoint.sh
+EXPOSE 80
+
+ENTRYPOINT supervisord
